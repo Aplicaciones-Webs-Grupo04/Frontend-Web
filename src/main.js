@@ -35,7 +35,7 @@ import ConfirmDialog from "primevue/confirmdialog";
 
 createApp(App)
     .use(router)
-    .use(PrimeVue, { ripple: true })
+    .use(PrimeVue, {ripple: true})
     .use(ConfirmationService)
     .use(ToastService)
     .component('pv-button', Button)
