@@ -31,7 +31,7 @@
   </div>
 
   <!-- RIGHT SIDE FOR THE FORM -->
-  <div class="patient-info">
+  <div class="patient-card">
     <div v-for="medication in medications" :key="medication.id" class="medication-card">
       <h5>Medication Name: {{ medication.name }}</h5>
       <p>Dosage/Frequency: {{ medication.interval}}</p>
@@ -46,6 +46,8 @@
 
 <script>
 
+import http from "../../shared/services/http-common.js";
+
 export default {
   data() {
     return {
@@ -54,17 +56,40 @@ export default {
       quantity: [],
       startedDate: null,
       endDate: null,
+      medications: []
     };
   },
   methods: {
-    submitForm() {
-      // Lógica para enviar el formulario
-      console.log("Medication Name:", this.name);
-      console.log("Dosage/Frequency:", this.interval);
-      console.log("Quantity:", this.quantity);
-      console.log("StartDate:", this.startDate);
-      console.log("EndDate:" , this.endDate);
+    getMedications(){
+      http.get("/medications")
+      .then(response => {
+        this.medications = response.data;
+      })
+          .catch(error => {
+            console.log('Failed to catch data of medications', error);
+          });
+    },
+
+    addMedication(){
+      const newMedication = {
+        name: this.name,
+        frequency: this.interval,
+        quantity: this.quantity,
+        startedDate: this.startedDate,
+        endDate: this.endDate,
+      };
+
+      http.post("/medications", newMedication)
+          .then(response => {
+            this.medications.push(response.data);
+          })
+          .catch(error => {
+            console.error('Failed to add medication', error);
+          });
+
     }
+
   }
 };
+
 </script>
