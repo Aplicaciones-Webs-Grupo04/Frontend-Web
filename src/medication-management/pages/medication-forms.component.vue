@@ -26,17 +26,13 @@
 
     <button class="submit-button" @click="submitForm">Save</button>
 
-
   </div>
+
 </template>
 
 <script>
 
-
-import PvCalendar from "../../main.js";
-
 export default {
-  components: {PvCalendar},
   data() {
     return {
       name: [],
