@@ -17,8 +17,13 @@
     </pv-chips>
 
     <h5>Started Date</h5>
-      <pv-calendar v-model="startDate" date-format="dd/mm/yy">
+      <pv-calendar v-model="startedDate" date-format="dd/mm/yy">
       </pv-calendar>
+
+    <h5>End Date</h5>
+    <pv-calendar v-model="endDate" date-format="dd/mm/yy">
+    </pv-calendar>
+
     <button class="submit-button" @click="submitForm">Save</button>
 
 
@@ -28,13 +33,17 @@
 <script>
 
 
+import PvCalendar from "../../main.js";
+
 export default {
+  components: {PvCalendar},
   data() {
     return {
       name: [],
       interval: [],
       quantity: [],
       startedDate: null,
+      endDate: null,
     };
   },
   methods: {
@@ -44,6 +53,7 @@ export default {
       console.log("Dosage/Frequency:", this.interval);
       console.log("Quantity:", this.quantity);
       console.log("StartDate:", this.startDate);
+      console.log("EndDate:" , this.endDate);
     }
   }
 };
