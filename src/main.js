@@ -10,6 +10,7 @@ import ToastService from 'primevue/toastservice';
 import ConfirmationService from "primevue/confirmationservice";
 
 import Chips from 'primevue/chips';
+import Calendar from 'primevue/calendar';
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Row from "primevue/row";
@@ -39,6 +40,7 @@ createApp(App)
     .use(PrimeVue, {ripple: true})
     .use(ConfirmationService)
     .use(ToastService)
+    .component('pv-calendar', Calendar)
     .component('pv-button', Button)
     .component('pv-chips', Chips)
     .component('pv-card', Card)
