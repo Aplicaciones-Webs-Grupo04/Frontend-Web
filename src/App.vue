@@ -1,12 +1,14 @@
-<script >
-
-</script>
-
 <template>
-
-
+  <div id = "app">
+    <h1>Agregar datos</h1>
+    <Form />
+  </div>
 </template>
 
-<style >
+<script>
+import Form from ''
 
-</style>
+export default {
+  components: {Form}
+}
+</script>
