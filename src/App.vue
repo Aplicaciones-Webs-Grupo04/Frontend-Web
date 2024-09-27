@@ -1,30 +1,53 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import { RouterView, RouterLink } from 'vue-router'; // Importar RouterView para manejar las rutas
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div id="app">
+    <header>
+      <nav class="navbar">
+        <RouterLink to="/" class="nav-link">Home</RouterLink>
+        <RouterLink to="/patients" class="nav-link">Patients</RouterLink>
+      </nav>
+    </header>
+
+    <!-- Renderizamos el contenido según la ruta activa -->
+    <main>
+      <RouterView />
+    </main>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+#app {
+  font-family: 'DM Sans', sans-serif;
+  color: #4F4F4F;
+  margin: 0;
+  padding: 0;
+  background-color: #FFFFFF;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  background-color: #081828; /* Azul Profundo - Secundario */
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+.nav-link {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: #10BEAE; /* Verde Vitalidad - Principal */
+  border-radius: 5px;
+}
+
+main {
+  padding: 20px;
 }
 </style>
