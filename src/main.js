@@ -9,6 +9,7 @@ import 'primevue/resources/themes/mdc-light-indigo/theme.css';
 import ToastService from 'primevue/toastservice';
 import ConfirmationService from "primevue/confirmationservice";
 
+import Chips from 'primevue/chips';
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Row from "primevue/row";
@@ -39,6 +40,7 @@ createApp(App)
     .use(ConfirmationService)
     .use(ToastService)
     .component('pv-button', Button)
+    .component('pv-chips', Chips)
     .component('pv-card', Card)
     .component('pv-column', Column)
     .component('pv-confirm-dialog', ConfirmDialog)
