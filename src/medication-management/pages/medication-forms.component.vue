@@ -15,17 +15,26 @@
         </div>
       </template>
     </pv-chips>
+
+    <h5>Started Date</h5>
+      <pv-calendar v-model="startDate" date-format="dd/mm/yy">
+      </pv-calendar>
     <button class="submit-button" @click="submitForm">Save</button>
+
+
   </div>
 </template>
 
 <script>
+
+
 export default {
   data() {
     return {
       name: [],
       interval: [],
       quantity: [],
+      startedDate: null,
     };
   },
   methods: {
@@ -34,6 +43,7 @@ export default {
       console.log("Medication Name:", this.name);
       console.log("Dosage/Frequency:", this.interval);
       console.log("Quantity:", this.quantity);
+      console.log("StartDate:", this.startDate);
     }
   }
 };
