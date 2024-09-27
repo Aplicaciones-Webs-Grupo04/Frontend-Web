@@ -8,6 +8,8 @@ export default {
       items: [
         { label: 'Home', to: '/home' },
         { label: 'About', to: '/about' },
+          //medication está aquí solo de prueba:)
+        { label: 'Medication', to: '/medication' },
       ]
     };
   },
