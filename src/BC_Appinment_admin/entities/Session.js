@@ -3,7 +3,7 @@ export class Session {
         this.id = id;
         this.appointmentDate = appointmentDate;
         this.patient = patient;
-        this.asunto = " Terapi" ;
+        this.asunto = " therapy" ;
     }
 
     static fromJson(json) {
