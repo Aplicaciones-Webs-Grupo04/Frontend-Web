@@ -92,7 +92,7 @@ export default {
 
 <style scoped>
 .patient-card {
-  background-color: #10BEAE ; /* Cambia este color según tus necesidades */
+  background-color: #081828 ; /* Cambia este color según tus necesidades */
   color: #000000;
   padding: 20px;
   border-radius: 8px;
@@ -114,9 +114,16 @@ export default {
 
 .medication-card {
   transition: transform 0.3s ease;
+  background-color: #ffffff   ; /* Cambia este color según tus necesidades */
+  border: 1px solid #ffffff ; /* Color del borde del formulario */
 }
 
 .medication-card:hover {
   transform: scale(1.05);
+}
+.page-container {
+  background-color: #10BEAE; /* Cambia este color según tus necesidades */
+  padding: 20px;
+  border-radius: 8px;
 }
 </style>
