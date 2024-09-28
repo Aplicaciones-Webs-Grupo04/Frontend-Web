@@ -1,10 +1,5 @@
-import axios from 'axios'
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
-const http = axios.create({
-    baseURL: API_BASE_URL,
-});
-export default http;
+// src/BC_Appinment_admin/Service/session-api.js
+import http from '../../shared/services/http-common.js';
 
 export const obtenerSessions = () => {
     return http.get('/sessions')
@@ -14,6 +9,7 @@ export const obtenerSessions = () => {
             return [];
         });
 };
+
 export const agregarSesion = (sesion) => {
     return http.post('/sessions', sesion)
         .then(response => response.data)
@@ -21,4 +17,4 @@ export const agregarSesion = (sesion) => {
             console.error(error);
             return null;
         });
-}
+};
