@@ -27,11 +27,13 @@
   </div>
 </template>
 
+
+
 <script setup>
-import Calendar from "src/patients/shared/Calendar.vue";
-import TaskList from "src/patients/shared/TaskList.vue";
-import MedicationList from "src/patients/shared/MedicationList.vue";
-import Therapy from "src/patients/shared/Therapy.vue";
+import Calendar from '../shared/Calendar.vue';
+import TaskList from '../shared/TaskList.vue';
+import MedicationList from '../shared/MedicationList.vue';
+import Therapy from '../shared/Therapy.vue';
 </script>
 
 <style scoped>
