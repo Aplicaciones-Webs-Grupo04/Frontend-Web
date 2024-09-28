@@ -10,6 +10,8 @@ export default {
         { label: 'About', to: '/about' },
           //medication está aquí solo de prueba:)
         { label: 'Medication', to: '/medication' },
+        { label: 'Apoinment Admin', to: '/sessions' },
+        { label: 'Add Apoinment', to: '/addSession' },
       ]
     };
   },
