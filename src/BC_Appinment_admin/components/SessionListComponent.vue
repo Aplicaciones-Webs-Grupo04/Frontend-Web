@@ -37,7 +37,7 @@ export default {
   max-width: 100%;
   margin: 20px auto;
   padding: 10px;
-  background-color: #69BFB7;
+  background-color: #081828  ;
   border: none;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -46,10 +46,12 @@ export default {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
-
 .list {
-  /* Add some margin to each list item */
-  margin-bottom: 20px;
-}
+    flex: 1 1 calc(33.333% - 20px);
+    box-sizing: border-box;
+  }
 </style>

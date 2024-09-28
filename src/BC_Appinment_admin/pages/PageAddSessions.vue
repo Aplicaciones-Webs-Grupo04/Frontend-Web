@@ -27,7 +27,7 @@ export default {
 
 <style>
 .headerPage {
-  background-color: #091133;
+  background-color: #081828 ;
   color: #fff;
   padding: 1em;
   text-align: center;
@@ -44,8 +44,8 @@ export default {
   width: 40%; /* Ajustamos el ancho del formulario */
   margin: 40px 0; /* Quitamos el margin auto para que no se centre */
   padding: 20px;
-  background-color: #69BFB7; /* Color de fondo del formulario */
-  border: 1px solid #308C83; /* Color del borde del formulario */
+  background-color: #081828   ; /* Color de fondo del formulario */
+  border: 1px solid #10BEAE ; /* Color del borde del formulario */
   border-radius: 0.5em;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
