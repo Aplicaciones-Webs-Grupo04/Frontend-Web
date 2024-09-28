@@ -17,9 +17,9 @@ export default {
 <style>
 .session-card {
   /* Add some basic styling to the card */
-  background-color: #308C83;
+  background-color: #10BEAE ;
   padding: 20px;
-  border: 1px solid #69BFB7;
+  border: 1px solid #081828   ;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

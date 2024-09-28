@@ -45,8 +45,8 @@ form {
   max-width: 400px;
   margin: 40px auto;
   padding: 20px;
-  background-color: #69BFB7; /* Color de fondo del formulario */
-  border: 1px solid #308C83; /* Color del borde del formulario */
+  background-color: #10BEAE ; /* Color de fondo del formulario */
+  border: 1px solid #10BEAE ; /* Color del borde del formulario */
   border-radius: 0.5em;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -54,7 +54,7 @@ form {
 label {
   display: block;
   margin-bottom: 10px;
-  color: #091133; /* Color del texto de los labels */
+  color: #081828 ; /* Color del texto de los labels */
 }
 
 input[type="date"], input[type="text"] {
@@ -75,7 +75,7 @@ button[type="submit"] {
   width: 100%;
   height: 40px;
   padding: 10px;
-  background-color: #091133; /* Color de fondo del botón de envío */
+  background-color: #081828; /* Color de fondo del botón de envío */
   color: #fff; /* Color del texto del botón de envío */
   border: none;
   border-radius: 0.5em;
@@ -83,6 +83,6 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: #308C83;
+  background-color: #081840;
 }
 </style>
