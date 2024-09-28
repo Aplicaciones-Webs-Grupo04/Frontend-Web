@@ -35,6 +35,7 @@
           <th>Patient ID</th>
           <th>Created At</th>
           <th>Updated At</th>
+          <th>Actions</th> <!-- Nueva columna para acciones -->
         </tr>
         </thead>
         <tbody>
@@ -46,6 +47,9 @@
           <td>{{ task.idPatient }}</td>
           <td>{{ task.createdAt }}</td>
           <td>{{ task.updatedAt }}</td>
+          <td>
+            <button @click="deleteTask(task.id)">Eliminar</button> <!-- Botón de eliminar -->
+          </td>
         </tr>
         </tbody>
       </table>
@@ -57,7 +61,7 @@
     <!-- Panel de estadísticas a la derecha -->
     <div class="task-stats">
       <h2>Task Statistics</h2>
-      <canvas id="taskChart"></canvas>
+      <canvas id="taskChart" width="10" height="5"></canvas>
     </div>
 
     <!-- Modal para agregar tarea (inicialmente oculto) -->
@@ -167,47 +171,95 @@ const addTask = async () => {
     console.error('Error al agregar la tarea:', error);
   }
 };
+
+// Función para eliminar la tarea de la fake API
+const deleteTask = async (taskId) => {
+  try {
+    // Hacemos una solicitud DELETE a la API para eliminar la tarea
+    const response = await fetch(`http://localhost:3000/task/${taskId}`, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al eliminar la tarea');
+    }
+
+    // Eliminar la tarea de la lista de tareas
+    tasks.value = tasks.value.filter(task => task.id !== taskId);
+  } catch (error) {
+    console.error('Error al eliminar la tarea:', error);
+  }
+};
 </script>
 
 <style scoped>
 .task-dashboard {
-  background-color: #10BEAE; /* Color del fondo del contenedor */
-  color: black; /* Texto negro */
-  padding: 20px;
+  background-color: #10BEAE; /* Turquoise background color */
+  color: black; /* Black text */
+  padding: 10px; /* Reduced padding */
   display: flex;
-  flex-direction: row; /* Cambia a columna para organizar mejor */
-  gap: 20px;
-  height: 100vh; /* Ocupa toda la altura de la ventana */
-  width: 100%; /* Ocupa todo el ancho de la ventana */
+  flex-direction: row; /* Keep the chart next to the task cards */
+  gap: 10px; /* Reduced gap */
+  height: 100vh; /* Occupy the full height of the viewport */
+  width: 100%; /* Occupy the full width of the viewport */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
 }
 
 .task-cards {
-  flex: 2; /* Toma el espacio suficiente para los cuadros de tareas */
-  background-color: white; /* Fondo blanco para la sección de tareas */
-  padding: 20px; /* Espaciado interno */
-  border-radius: 8px; /* Bordes redondeados */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar efecto de profundidad */
+  flex: 2; /* Take enough space for the task cards */
+  background-color: white; /* White background for the task section */
+  padding: 10px; /* Reduced padding */
+  border-radius: 8px; /* Rounded borders */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth effect */
 }
 
-.task-header {
+.task-stats {
+  flex: 1; /* Take remaining space for the stats */
+  background-color: white; /* White background for the stats section */
+  padding: 10px; /* Reduced padding */
+  border-radius: 8px; /* Rounded borders */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth effect */
+}
+
+.task-summary {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  gap: 5px; /* Reduced gap */
+}
+
+.task-list {
+  margin-top: 10px; /* Reduced margin */
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.task-list th, .task-list td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 5px; /* Reduced padding */
+}
+
+.task-list th {
+  background-color: #f2f2f2; /* Light gray background for headers */
+}
+
+.task-list tr:nth-child(even) {
+  background-color: #f9f9f9; /* Alternating row color */
 }
 
 .add-task-btn {
-  background-color: #007bff; /* Azul */
-  color: white; /* Texto blanco */
-  border: none; /* Sin borde */
-  padding: 5px 10px; /* Espaciado interno reducido */
-  border-radius: 5px; /* Bordes redondeados */
-  cursor: pointer; /* Cambia el cursor al pasar el mouse */
-  font-size: 14px; /* Tamaño de fuente normal */
-  margin-top: 10px; /* Margen superior para separación */
+  background-color: #007bff; /* Blue */
+  color: white; /* White text */
+  border: none; /* No border */
+  padding: 5px 10px; /* Reduced internal spacing */
+  border-radius: 5px; /* Rounded borders */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 14px; /* Normal font size */
+  margin-top: 5px; /* Reduced top margin */
 }
 
 .add-task-btn:hover {
-  background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+  background-color: #0056b3; /* Darker blue on hover */
 }
 
 .task-summary {
@@ -236,24 +288,25 @@ const addTask = async () => {
 }
 
 .modal {
-  display: flex; /* Muestra como flex */
-  position: fixed; /* Fijo al viewport */
-  z-index: 2; /* Sobre otros elementos */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  position: fixed;
+  z-index: 2;
   left: 0;
   top: 0;
-  width: 100%; /* Ancho completo */
-  height: 100%; /* Altura completa */
-  overflow: auto; /* Desplazamiento si es necesario */
-  background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .modal-content {
-  background-color: white; /* Fondo blanco para el contenido del modal */
-  margin: 15% auto; /* Margen superior e inferior */
-  padding: 20px; /* Espaciado interno */
-  border: 1px solid #888; /* Borde gris */
-  width: 80%; /* Ancho del modal */
-  border-radius: 8px; /* Bordes redondeados */
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  border-radius: 8px;
 }
 
 .close {
