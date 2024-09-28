@@ -66,8 +66,7 @@ export default {
       http.get("/medications")
       .then(response => {
         this.medications = response.data;
-      })
-          .catch(error => {
+      }).catch(error => {
             console.log('Failed to catch data of medications', error);
           });
     },
