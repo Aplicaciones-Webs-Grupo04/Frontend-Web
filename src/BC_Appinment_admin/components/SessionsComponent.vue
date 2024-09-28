@@ -1,11 +1,3 @@
-<template>
-  <div class="session-card">
-    <h2 class="title">{{ session.patient.name }} {{ session.patient.lastName }}</h2>
-    <p class="subject"> {{session.asunto}}</p>
-    <p class="date">Date of appointment: {{ session.appointmentDate }}</p>
-  </div>
-</template>
-
 <script>
 export default {
   props: {
@@ -14,10 +6,18 @@ export default {
 }
 </script>
 
+<template>
+  <div class="session-card">
+    <h2 class="title">{{ session.patient.name }} {{ session.patient.lastName }}</h2>
+    <p class="subject"> {{session.asunto}}</p>
+    <p class="date">Date of appointment: {{ session.appointmentDate }}</p>
+  </div>
+</template>
+
 <style>
 .session-card {
   /* Add some basic styling to the card */
-  background-color: #C2F2ED;
+  background-color: #308C83;
   padding: 20px;
   border: 1px solid #69BFB7;
   border-radius: 10px;
@@ -28,19 +28,19 @@ export default {
   /* Style the title with a larger font size and bold font weight */
   font-size: 24px;
   font-weight: bold;
-  color: #308C83;
+  color: white;
   margin-bottom: 10px;
 }
 
 .subject {
   /* Add some margin to the subject paragraph */
   margin-bottom: 10px;
-  color: #69BFB7;
+  color: white;
 }
 
 .date {
   /* Add some margin to the date paragraph */
   margin-bottom: 20px;
-  color: #308C83;
+  color: white;
 }
 </style>
