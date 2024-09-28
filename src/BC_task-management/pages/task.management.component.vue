@@ -35,13 +35,13 @@
           <th>Patient ID</th>
           <th>Created At</th>
           <th>Updated At</th>
-          <th>Actions</th> <!-- New column for actions -->
+          <th>Actions</th> 
         </tr>
         </thead>
         <tbody>
         <tr v-for="task in tasks" :key="task.id">
           <td>{{ task.id }}</td>
-          <td>{{ task.title }}</td> <!-- 'tittle' should be corrected to 'title' in your API if it's a typo -->
+          <td>{{ task.title }}</td>
           <td>{{ task.description }}</td>
           <td>{{ task.status === 1 ? 'Complete' : 'Incomplete' }}</td>
           <td>{{ task.idPatient }}</td>
@@ -54,17 +54,16 @@
         </tbody>
       </table>
 
-      <!-- Button to add tasks, now below the table -->
       <button class="add-task-btn" @click="showAddTaskModal">Add Task</button>
     </div>
 
-    <!-- Statistics panel on the right -->
+
     <div class="task-stats">
       <h2>Task Statistics</h2>
       <canvas id="taskChart" width="10" height="5"></canvas>
     </div>
 
-    <!-- Modal to add task (initially hidden) -->
+
     <div v-if="isModalVisible" class="modal">
       <div class="modal-content">
         <span class="close" @click="closeModal">&times;</span>
@@ -99,7 +98,7 @@ const incompleteTasks = ref([]);
 const overdueTasks = ref([]);
 const dueTodayTasks = ref([]);
 const isModalVisible = ref(false); // Modal state
-const newTask = ref({ title: '', description: '', status: 0, idPatient: 1 }); // New task data
+const newTask = ref({ title: '', description: '', status: 0, idPatient: 1 }); 
 
 onMounted(async () => {
   tasks.value = await getTasks();
@@ -169,7 +168,7 @@ const deleteTask = async (taskId) => {
   try {
     const deletedTask = await apiDeleteTask(taskId);
     if (deletedTask) {
-      tasks.value = tasks.value.filter(task => task.id !== taskId); // Remove the task from the task list
+      tasks.value = tasks.value.filter(task => task.id !== taskId); 
     } else {
       throw new Error('Failed to delete task');
     }
@@ -182,41 +181,41 @@ const deleteTask = async (taskId) => {
 
 <style scoped>
 .task-dashboard {
-  background-color: #10BEAE; /* Turquoise background color */
-  color: black; /* Black text */
-  padding: 10px; /* Reduced padding */
+  background-color: #10BEAE;
+  color: black; 
+  padding: 10px; 
   display: flex;
-  flex-direction: row; /* Keep the chart next to the task cards */
-  gap: 10px; /* Reduced gap */
-  height: 100vh; /* Occupy the full height of the viewport */
-  width: 100%; /* Occupy the full width of the viewport */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  flex-direction: row; 
+  gap: 10px; 
+  height: 100vh; 
+  width: 100%; 
+  justify-content: center; 
+  align-items: center; 
 }
 
 .task-cards {
-  flex: 2; /* Take enough space for the task cards */
-  background-color: white; /* White background for the task section */
-  padding: 10px; /* Reduced padding */
-  border-radius: 8px; /* Rounded borders */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth effect */
+  flex: 2; 
+  background-color: white; 
+  padding: 10px; 
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .task-stats {
-  flex: 1; /* Take remaining space for the stats */
-  background-color: white; /* White background for the stats section */
-  padding: 10px; /* Reduced padding */
-  border-radius: 8px; /* Rounded borders */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth effect */
+  flex: 1; 
+  background-color: white; 
+  padding: 10px; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .task-summary {
   display: flex;
-  gap: 5px; /* Reduced gap */
+  gap: 5px; 
 }
 
 .task-list {
-  margin-top: 10px; /* Reduced margin */
+  margin-top: 10px; 
   border-collapse: collapse;
   width: 100%;
 }
@@ -224,36 +223,36 @@ const deleteTask = async (taskId) => {
 .task-list th, .task-list td {
   border: 1px solid #dddddd;
   text-align: left;
-  padding: 5px; /* Reduced padding */
+  padding: 5px; 
 }
 
 .task-list th {
-  background-color: #f2f2f2; /* Light gray background for headers */
+  background-color: #f2f2f2; 
 }
 
 .task-list tr:nth-child(even) {
-  background-color: #f9f9f9; /* Alternating row color */
+  background-color: #f9f9f9;
 }
 
 .add-task-btn {
   background-color: #007bff; /* Blue */
-  color: white; /* White text */
-  border: none; /* No border */
-  padding: 5px 10px; /* Reduced internal spacing */
-  border-radius: 5px; /* Rounded borders */
-  cursor: pointer; /* Pointer cursor on hover */
-  font-size: 14px; /* Normal font size */
-  margin-top: 5px; /* Reduced top margin */
+  color: white;
+  border: none; 
+  padding: 5px 10px; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  font-size: 14px; 
+  margin-top: 5px; 
 }
 
 .add-task-btn:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3; 
 }
 
 .modal {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  justify-content: center; 
+  align-items: center; 
   position: fixed;
   z-index: 2;
   left: 0;
@@ -273,16 +272,16 @@ const deleteTask = async (taskId) => {
 }
 
 .close {
-  color: #aaa; /* Gray color */
-  float: right; /* Align to the right */
-  font-size: 28px; /* Font size */
-  font-weight: bold; /* Bold */
+  color: #aaa;
+  float: right; 
+  font-size: 28px; 
+  font-weight: bold; 
 }
 
 .close:hover,
 .close:focus {
-  color: black; /* Black color on hover */
-  text-decoration: none; /* No underline */
-  cursor: pointer; /* Pointer cursor on hover */
+  color: black;
+  text-decoration: none; 
+  cursor: pointer;
 }
 </style>
