@@ -12,7 +12,7 @@ export default {
 
 <style>
 .headerPage {
-  background-color: #091133;
+  background-color: #081828 ;
   color: #fff;
   padding: 1em;
   text-align: center;

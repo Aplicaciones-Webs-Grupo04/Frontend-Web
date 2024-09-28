@@ -89,3 +89,41 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.patient-card {
+  background-color: #081828 ; /* Cambia este color según tus necesidades */
+  color: #000000;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.submit-button {
+  background-color: #10BEAE; /* Cambia este color según tus necesidades */
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #0a8f7a; /* Cambia este color según tus necesidades */
+}
+
+.medication-card {
+  transition: transform 0.3s ease;
+  background-color: #ffffff   ; /* Cambia este color según tus necesidades */
+  border: 1px solid #ffffff ; /* Color del borde del formulario */
+}
+
+.medication-card:hover {
+  transform: scale(1.05);
+}
+.page-container {
+  background-color: #10BEAE; /* Cambia este color según tus necesidades */
+  padding: 20px;
+  border-radius: 8px;
+}
+</style>
