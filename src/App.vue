@@ -45,7 +45,7 @@ export default {
         { label: 'Home', to: '/home', icon: 'pi pi-home' },
         { label: 'Alerts', to: '/alerts', icon: 'pi pi-bell' },
         { label: 'Profile', to: '/profile', icon: 'pi pi-user' },
-        { label: 'Tasks', to: '/tasks', icon: 'pi pi-list' },
+        { label: 'Task', to: '/task', icon: 'pi pi-list' },
       ],
       loginIcon: { label: 'Login', to: '/login', icon: 'pi pi-sign-in' }
     };

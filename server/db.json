@@ -510,15 +510,6 @@
       "status": 1,
       "createdAt": "2021-06-01",
       "updatedAt": "2021-06-01"
-    },
-    {
-      "id": "3",
-      "idPatient": 3,
-      "tittle": "Task 3",
-      "description": "This is a task description",
-      "status": 0,
-      "createdAt": "2021-06-01",
-      "updatedAt": "2021-06-01"
     }
   ],
   "patient-biological-analytic": [
