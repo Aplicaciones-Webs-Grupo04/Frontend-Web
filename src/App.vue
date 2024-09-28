@@ -1,7 +1,3 @@
-<script setup>
-import { RouterView, RouterLink } from 'vue-router'; // Importar RouterView para manejar las rutas
-</script>
-
 <template>
   <div id="app">
     <header>
@@ -24,6 +20,9 @@ import { RouterView, RouterLink } from 'vue-router'; // Importar RouterView para
   color: #4F4F4F;
   margin: 0;
   padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background-color: #FFFFFF;
 }
 
@@ -48,6 +47,10 @@ import { RouterView, RouterLink } from 'vue-router'; // Importar RouterView para
 }
 
 main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 20px;
 }
 </style>

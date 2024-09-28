@@ -1,10 +1,8 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import router from './router';
+import router from './router'; // Importar el router para la ubicacion (    npm install vue-router@4 )
 
-import './style.css';
 
 const app = createApp(App);
-
-app.use(router);
+app.use(router); // Usar el router
 app.mount('#app');
