@@ -25,6 +25,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router'; // Importa el router
 
 const buttons = ref([
   { id: 1, label: 'Tareas' },
@@ -33,15 +34,30 @@ const buttons = ref([
   { id: 4, label: 'Prescripciones' },
 ]);
 
-function handleButtonClick(label) {
-  // Maneja el clic en el botón
-  console.log(`${label} fue clicado`);
-}
+const router = useRouter(); // Instancia el router
 
-function saveChanges() {
-  // Lógica para guardar cambios
-  console.log('Cambios guardados');
-}
+const handleButtonClick = (label) => {
+  switch (label) {
+    case 'Funciones Biológicas':
+      router.push('/biological-functions');
+      break;
+    case 'Tareas':
+      router.push('/tasks');
+      break;
+
+    case 'Estado de Ánimo':
+      router.push('/mood-statement');
+      break;
+
+    case 'Prescripciones':
+      router.push('/prescriptions');
+      break;
+
+    default:
+      console.log('Botón no configurado');
+  }
+};
+
 </script>
 
 <style scoped>
