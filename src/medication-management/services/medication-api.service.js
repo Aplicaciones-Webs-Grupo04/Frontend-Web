@@ -1,5 +1,5 @@
+// src/medication-management/services/medication-api.service.js
 import http from "../../shared/services/http-common.js";
-
 
 export class MedicationApiService {
   getAllMedications() {
@@ -25,5 +25,4 @@ export class MedicationApiService {
   findByNameMedication(name){
     return http.get(`/medications?name=${name}`);
   }
-
 }
