@@ -49,12 +49,38 @@
         </tr>
         </tbody>
       </table>
+
+      <!-- Botón para agregar tareas, ahora debajo de la tabla -->
+      <button class="add-task-btn" @click="showAddTaskModal">Agregar Tarea</button>
     </div>
 
     <!-- Panel de estadísticas a la derecha -->
     <div class="task-stats">
       <h2>Task Statistics</h2>
       <canvas id="taskChart"></canvas>
+    </div>
+
+    <!-- Modal para agregar tarea (inicialmente oculto) -->
+    <div v-if="isModalVisible" class="modal">
+      <div class="modal-content">
+        <span class="close" @click="closeModal">&times;</span>
+        <h2>Agregar Nueva Tarea</h2>
+        <form @submit.prevent="addTask">
+          <label for="title">Título:</label>
+          <input type="text" v-model="newTask.title" required />
+
+          <label for="description">Descripción:</label>
+          <textarea v-model="newTask.description" required></textarea>
+
+          <label for="status">Estado:</label>
+          <select v-model="newTask.status" required>
+            <option value="0">Incompleta</option>
+            <option value="1">Completa</option>
+          </select>
+
+          <button type="submit">Agregar Tarea</button>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -68,6 +94,8 @@ const tasks = ref([]);
 const incompleteTasks = ref([]);
 const overdueTasks = ref([]);
 const dueTodayTasks = ref([]);
+const isModalVisible = ref(false); // Estado del modal
+const newTask = ref({ title: '', description: '', status: 0, idPatient: 1 }); // Datos de la nueva tarea
 
 onMounted(async () => {
   tasks.value = await getTasks();
@@ -104,6 +132,23 @@ onMounted(async () => {
     }
   });
 });
+
+// Funciones para manejar el modal
+const showAddTaskModal = () => {
+  isModalVisible.value = true;
+};
+
+const closeModal = () => {
+  isModalVisible.value = false;
+};
+
+const addTask = () => {
+  // Lógica para agregar la tarea, aquí puedes hacer una llamada a tu API para añadir la nueva tarea
+  console.log('Nueva tarea agregada:', newTask.value);
+  // Restablecer los campos
+  newTask.value = { title: '', description: '', status: 0, idPatient: 1 };
+  closeModal();
+};
 </script>
 
 <style scoped>
@@ -112,27 +157,40 @@ onMounted(async () => {
   color: black; /* Texto negro */
   padding: 20px;
   display: flex;
-  flex-direction: row; /* Cambia la distribución a horizontal */
+  flex-direction: row; /* Cambia a columna para organizar mejor */
   gap: 20px;
   height: 100vh; /* Ocupa toda la altura de la ventana */
-  width: 102%; /* Ocupa todo el ancho de la ventana */
+  width: 100%; /* Ocupa todo el ancho de la ventana */
 }
 
 .task-cards {
   flex: 2; /* Toma el espacio suficiente para los cuadros de tareas */
-  overflow-y: auto; /* Permite el desplazamiento si hay muchas tareas */
 }
 
-.task-stats {
-  flex: 1; /* El panel de estadísticas toma menos espacio */
+.task-header {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 }
 
-.task-stats h2 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
+.add-task-btn {
+  background-color: #007bff; /* Azul */
+  color: white; /* Texto blanco */
+  border: none; /* Sin borde */
+  padding: 5px 10px; /* Espaciado interno reducido */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor al pasar el mouse */
+  font-size: 14px; /* Tamaño de fuente normal */
+  margin-top: 10px; /* Margen superior para separación */
+}
+
+.add-task-btn:hover {
+  background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+}
+
+.task-summary {
+  display: flex;
+  gap: 10px;
 }
 
 .task-list {
@@ -155,28 +213,39 @@ onMounted(async () => {
   background-color: #f9f9f9; /* Fila alternante */
 }
 
-.task-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+.modal {
+  display: flex; /* Muestra como flex */
+  position: fixed; /* Fijo al viewport */
+  z-index: 1; /* Sobre otros elementos */
+  left: 0;
+  top: 0;
+  width: 100%; /* Ancho completo */
+  height: 100%; /* Altura completa */
+  overflow: auto; /* Desplazamiento si es necesario */
+  background-color: rgb(0,0,0); /* Fondo negro */
+  background-color: rgba(0,0,0,0.4); /* Fondo negro con opacidad */
 }
 
-.task-header h1 {
-  font-size: 2em;
+.modal-content {
+  background-color: #fefefe; /* Fondo blanco para el contenido del modal */
+  margin: 15% auto; /* Margen superior e inferior */
+  padding: 20px; /* Espaciado interno */
+  border: 1px solid #888; /* Borde gris */
+  width: 80%; /* Ancho del modal */
+  border-radius: 8px; /* Bordes redondeados */
 }
 
-.task-summary {
-  display: flex;
-  gap: 10px;
+.close {
+  color: #aaa; /* Color gris */
+  float: right; /* A la derecha */
+  font-size: 28px; /* Tamaño de la fuente */
+  font-weight: bold; /* Negrita */
 }
 
-.task-summary div {
-  background-color: #f5f5f5;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  flex: 1;
+.close:hover,
+.close:focus {
+  color: black; /* Color negro al pasar el mouse */
+  text-decoration: none; /* Sin subrayado */
+  cursor: pointer; /* Cambia el cursor al pasar el mouse */
 }
 </style>
