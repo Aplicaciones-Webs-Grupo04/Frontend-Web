@@ -6,6 +6,9 @@ import allSessions from '../BC_Appinment_admin/pages/pageAllSessions.vue';
 import addSessions from '../BC_Appinment_admin/pages/PageAddSessions.vue';
 import Usermng from '../BC_user-management/pages/user-mng.component.vue';
 import Taskmng from '../BC_task-management/pages/task.management.component.vue';
+import HomePatients from "../patients/components/HomePatients.vue";
+
+
 
 const router = createRouter({
     history: createWebHistory(),
@@ -17,6 +20,7 @@ const router = createRouter({
         { path: '/medication', component: MedicationFormsComponent, meta: { title: 'Medication' } },
         { path: '/profile', component: Usermng, meta: { title: 'Profile' } },
         { path: '/task', component: Taskmng, meta: { title: 'Task' } },
+        { path: '/alerts', component: HomePatients, meta: { title: 'Alerts' } },
         { path: '/', redirect: '/home' },
     ],
 });
