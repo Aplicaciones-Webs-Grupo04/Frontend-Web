@@ -1,15 +1,24 @@
-import axios from "axios";
+// services/patientsService.js
+import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_URL = 'http://localhost:3000';
 
-const http = axios.create({
-    baseURL: `${API_BASE_URL}/patients`,
-    headers: {
-        'Content-type': 'application/json'
+export const getPatients = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/patients`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching patients:', error);
+        throw error;
     }
-});
+};
 
-export const getPatients = () => http.get("/");
-export const addPatient = (patient) => http.post("/", patient);
-export const updatePatient = (id, patient) => http.put(`/${id}`, patient);
-export const deletePatient = (id) => http.delete(`/${id}`);
+export const getPatientById = async (id) => {
+    try {
+        const response = await axios.get(`${API_URL}/patients/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching patient:', error);
+        throw error;
+    }
+};

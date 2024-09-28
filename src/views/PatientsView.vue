@@ -44,18 +44,18 @@ const patients = ref([
 
 const router = useRouter();
 
-// Función para ver los detalles de un paciente
+// Detalle Paciente
 const viewPatient = (id) => {
   router.push(`/patient-profile/${id}`);
 };
 
-// Función para editar un paciente
+// Editar Paciente
 const editPatient = (id) => {
   alert(`Editing patient with ID: ${id}`);
-  // Aquí podrías implementar la lógica para editar el paciente
+  // Editar
 };
 
-// Función para eliminar un paciente
+// Eliminar Pacciente
 const deletePatient = (id) => {
   if (confirm('Are you sure you want to delete this patient?')) {
     const index = patients.value.findIndex(patient => patient.id === id);
