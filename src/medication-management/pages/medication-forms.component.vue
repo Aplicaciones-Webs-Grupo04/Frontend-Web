@@ -1,13 +1,12 @@
 <template>
   <div class="page-container">
     <div class="forms-section">
-      <!-- lEFT SIDE FOR THE FORMS -->
       <div class="form-container">
         <h5>Medication Name</h5>
-        <pv-chips v-model="name" />
+        <pv-chips v-model="name"/>
 
         <h5>Dosage/Frequency</h5>
-        <pv-chips v-model="interval" separator="," />
+        <pv-chips v-model="interval" separator=","/>
 
         <h5>Quantity</h5>
         <pv-chips v-model="quantity">
@@ -20,8 +19,8 @@
         </pv-chips>
 
         <h5>Started Date</h5>
-          <pv-calendar v-model="startedDate" date-format="dd/mm/yy">
-          </pv-calendar>
+        <pv-calendar v-model="startedDate" date-format="dd/mm/yy">
+        </pv-calendar>
 
         <h5>End Date</h5>
         <pv-calendar v-model="endDate" date-format="dd/mm/yy">
@@ -31,23 +30,19 @@
       </div>
     </div>
 
-    <!-- RIGHT SIDE FOR THE FORM -->
     <div class="patient-card">
       <div v-for="medication in medications" :key="medication.id" class="medication-card">
         <h5>Medication Name: {{ medication.name }}</h5>
-        <p>Dosage/Frequency: {{ medication.interval}}</p>
+        <p>Dosage/Frequency: {{ medication.interval }}</p>
         <p>Quantity: {{ medication.quantity }}</p>
-        <p>Start Date: {{medication.startDate}}</p>
-        <p>End Date: {{medication.endDate}}</p>
+        <p>Start Date: {{ medication.startDate }}</p>
+        <p>End Date: {{ medication.endDate }}</p>
       </div>
-
     </div>
-
   </div>
 </template>
 
 <script>
-
 import http from "../../shared/services/http-common.js";
 
 export default {
@@ -62,16 +57,16 @@ export default {
     };
   },
   methods: {
-    getMedications(){
+    getMedications() {
       http.get("/medications")
-      .then(response => {
-        this.medications = response.data;
-      }).catch(error => {
-            console.log('Failed to catch data of medications', error);
+          .then(response => {
+            this.medications = response.data;
+          })
+          .catch(error => {
+            console.log('Failed to fetch medications data', error);
           });
     },
-
-    addMedication(){
+    addMedication() {
       const newMedication = {
         name: this.name,
         frequency: this.interval,
@@ -87,13 +82,10 @@ export default {
           .catch(error => {
             console.error('Failed to add medication', error);
           });
-
     }
-
   },
   mounted() {
     this.getMedications();
   }
 };
-
 </script>
