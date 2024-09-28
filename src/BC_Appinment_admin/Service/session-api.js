@@ -14,3 +14,11 @@ export const obtenerSessions = () => {
             return [];
         });
 };
+export const agregarSesion = (sesion) => {
+    return http.post('/sessions', sesion)
+        .then(response => response.data)
+        .catch(error => {
+            console.error(error);
+            return null;
+        });
+}
