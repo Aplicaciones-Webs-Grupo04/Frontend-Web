@@ -9,7 +9,7 @@
             <h1>{{ platformName }}</h1>
             <p>{{ description }}</p>
             <div class="button">
-              <router-link to="/about-us" class="btn">More Information</router-link>
+              <router-link to="/about" class="btn">More Information</router-link>
             </div>
           </div>
         </div>
