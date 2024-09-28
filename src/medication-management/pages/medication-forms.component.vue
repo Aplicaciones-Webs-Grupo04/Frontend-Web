@@ -37,7 +37,7 @@
         <h5>Medication Name: {{ medication.name }}</h5>
         <p>Dosage/Frequency: {{ medication.interval}}</p>
         <p>Quantity: {{ medication.quantity }}</p>
-        <p>Start Date: {{medication.startedDate}}</p>
+        <p>Start Date: {{medication.startDate}}</p>
         <p>End Date: {{medication.endDate}}</p>
       </div>
 
