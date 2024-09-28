@@ -4,6 +4,7 @@ import AboutComponent from "../public/pages/about.component.vue";
 import MedicationFormsComponent from "../medication-management/pages/medication-forms.component.vue";
 import allSessions from '../BC_Appinment_admin/pages/pageAllSessions.vue';
 import addSessions from '../BC_Appinment_admin/pages/PageAddSessions.vue';
+import Usermng from '../BC_user-management/pages/user-mng.component.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -13,6 +14,7 @@ const router = createRouter({
         { path: '/home', component: HomeComponent, meta: { title: 'Home' } },
         { path: '/about', component: AboutComponent, meta: { title: 'About us' } },
         { path: '/medication', component: MedicationFormsComponent, meta: { title: 'Medication' } },
+        { path: '/profile', component: Usermng, meta: { title: 'Profile' } },
         { path: '/', redirect: '/home' },
     ],
 });
