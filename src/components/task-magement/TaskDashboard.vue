@@ -35,6 +35,7 @@
           <th>Patient ID</th>
           <th>Created At</th>
           <th>Updated At</th>
+          <th>Actions</th> <!-- Nueva columna para acciones -->
         </tr>
         </thead>
         <tbody>
@@ -46,15 +47,44 @@
           <td>{{ task.idPatient }}</td>
           <td>{{ task.createdAt }}</td>
           <td>{{ task.updatedAt }}</td>
+          <td>
+            <button @click="deleteTask(task.id)">Eliminar</button> <!-- Botón de eliminar -->
+          </td>
         </tr>
         </tbody>
       </table>
+
+      <!-- Botón para agregar tareas, ahora debajo de la tabla -->
+      <button class="add-task-btn" @click="showAddTaskModal">Agregar Tarea</button>
     </div>
 
     <!-- Panel de estadísticas a la derecha -->
     <div class="task-stats">
       <h2>Task Statistics</h2>
-      <canvas id="taskChart"></canvas>
+      <canvas id="taskChart" width="10" height="5"></canvas>
+    </div>
+
+    <!-- Modal para agregar tarea (inicialmente oculto) -->
+    <div v-if="isModalVisible" class="modal">
+      <div class="modal-content">
+        <span class="close" @click="closeModal">&times;</span>
+        <h2>Agregar Nueva Tarea</h2>
+        <form @submit.prevent="addTask">
+          <label for="title">Título:</label>
+          <input type="text" v-model="newTask.title" required />
+
+          <label for="description">Descripción:</label>
+          <textarea v-model="newTask.description" required></textarea>
+
+          <label for="status">Estado:</label>
+          <select v-model="newTask.status" required>
+            <option value="0">Incompleta</option>
+            <option value="1">Completa</option>
+          </select>
+
+          <button type="submit">Agregar Tarea</button>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -68,6 +98,8 @@ const tasks = ref([]);
 const incompleteTasks = ref([]);
 const overdueTasks = ref([]);
 const dueTodayTasks = ref([]);
+const isModalVisible = ref(false); // Estado del modal
+const newTask = ref({ tittle: '', description: '', status: 0, idPatient: 1 }); // Datos de la nueva tarea
 
 onMounted(async () => {
   tasks.value = await getTasks();
@@ -104,35 +136,135 @@ onMounted(async () => {
     }
   });
 });
+
+// Mostrar el modal para agregar tarea
+const showAddTaskModal = () => {
+  isModalVisible.value = true;
+};
+
+// Cerrar el modal
+const closeModal = () => {
+  isModalVisible.value = false;
+};
+
+// Función para agregar la tarea a la fake API
+const addTask = async () => {
+  try {
+    // Hacemos una solicitud POST a la API para agregar la nueva tarea
+    const response = await fetch('http://localhost:3000/task', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newTask.value),
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al agregar la tarea');
+    }
+
+    const addedTask = await response.json();
+    tasks.value.push(addedTask); // Añadir la nueva tarea a la lista de tareas
+    closeModal(); // Cerrar el modal
+    newTask.value = { tittle: '', description: '', status: 0, idPatient: 1 }; // Restablecer el formulario
+  } catch (error) {
+    console.error('Error al agregar la tarea:', error);
+  }
+};
+
+// Función para eliminar la tarea de la fake API
+const deleteTask = async (taskId) => {
+  try {
+    // Hacemos una solicitud DELETE a la API para eliminar la tarea
+    const response = await fetch(`http://localhost:3000/task/${taskId}`, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al eliminar la tarea');
+    }
+
+    // Eliminar la tarea de la lista de tareas
+    tasks.value = tasks.value.filter(task => task.id !== taskId);
+  } catch (error) {
+    console.error('Error al eliminar la tarea:', error);
+  }
+};
 </script>
 
 <style scoped>
 .task-dashboard {
-  background-color: white; /* Fondo blanco */
-  color: black; /* Texto negro */
-  padding: 20px;
+  background-color: #10BEAE; /* Turquoise background color */
+  color: black; /* Black text */
+  padding: 10px; /* Reduced padding */
   display: flex;
-  flex-direction: row; /* Cambia la distribución a horizontal */
-  gap: 20px;
-  height: 100vh; /* Ocupa toda la altura de la ventana */
-  width: 102%; /* Ocupa todo el ancho de la ventana */
+  flex-direction: row; /* Keep the chart next to the task cards */
+  gap: 10px; /* Reduced gap */
+  height: 100vh; /* Occupy the full height of the viewport */
+  width: 100%; /* Occupy the full width of the viewport */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
 }
 
 .task-cards {
-  flex: 2; /* Toma el espacio suficiente para los cuadros de tareas */
-  overflow-y: auto; /* Permite el desplazamiento si hay muchas tareas */
+  flex: 2; /* Take enough space for the task cards */
+  background-color: white; /* White background for the task section */
+  padding: 10px; /* Reduced padding */
+  border-radius: 8px; /* Rounded borders */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth effect */
 }
 
 .task-stats {
-  flex: 1; /* El panel de estadísticas toma menos espacio */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex: 1; /* Take remaining space for the stats */
+  background-color: white; /* White background for the stats section */
+  padding: 10px; /* Reduced padding */
+  border-radius: 8px; /* Rounded borders */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth effect */
 }
 
-.task-stats h2 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
+.task-summary {
+  display: flex;
+  gap: 5px; /* Reduced gap */
+}
+
+.task-list {
+  margin-top: 10px; /* Reduced margin */
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.task-list th, .task-list td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 5px; /* Reduced padding */
+}
+
+.task-list th {
+  background-color: #f2f2f2; /* Light gray background for headers */
+}
+
+.task-list tr:nth-child(even) {
+  background-color: #f9f9f9; /* Alternating row color */
+}
+
+.add-task-btn {
+  background-color: #007bff; /* Blue */
+  color: white; /* White text */
+  border: none; /* No border */
+  padding: 5px 10px; /* Reduced internal spacing */
+  border-radius: 5px; /* Rounded borders */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 14px; /* Normal font size */
+  margin-top: 5px; /* Reduced top margin */
+}
+
+.add-task-btn:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.task-summary {
+  display: flex;
+  gap: 10px;
 }
 
 .task-list {
@@ -155,28 +287,40 @@ onMounted(async () => {
   background-color: #f9f9f9; /* Fila alternante */
 }
 
-.task-header {
+.modal {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
-.task-header h1 {
-  font-size: 2em;
-}
-
-.task-summary {
-  display: flex;
-  gap: 10px;
-}
-
-.task-summary div {
-  background-color: #f5f5f5;
-  padding: 10px;
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  flex: 1;
+}
+
+.close {
+  color: #aaa; /* Color gris */
+  float: right; /* A la derecha */
+  font-size: 28px; /* Tamaño de la fuente */
+  font-weight: bold; /* Negrita */
+}
+
+.close:hover,
+.close:focus {
+  color: black; /* Color negro al pasar el mouse */
+  text-decoration: none; /* Sin subrayado */
+  cursor: pointer; /* Cambia el cursor al pasar el mouse */
 }
 </style>
+

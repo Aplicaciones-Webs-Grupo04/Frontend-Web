@@ -102,7 +102,7 @@
   ],
   "sessions": [
     {
-      "id": 17,
+      "id": "17",
       "idProfessional": 1,
       "idPatient": 0,
       "idNote": 1,
@@ -117,7 +117,7 @@
       }
     },
     {
-      "id": 21,
+      "id": "21",
       "idProfessional": 1,
       "idPatient": 0,
       "idNote": 1,
@@ -132,7 +132,7 @@
       }
     },
     {
-      "id": 22,
+      "id": "22",
       "idProfessional": 1,
       "idPatient": 0,
       "idNote": 1,
@@ -147,7 +147,7 @@
       }
     },
     {
-      "id": 23,
+      "id": "23",
       "idProfessional": 1,
       "idPatient": 0,
       "idNote": 1,
@@ -497,7 +497,7 @@
       "id": "1",
       "idPatient": 1,
       "tittle": "Task 1",
-      "description": "This is a task description",
+      "description": "Sesión de Terapia Cognitivo-Conductual",
       "status": 0,
       "createdAt": "2021-06-01",
       "updatedAt": "2021-06-01"
@@ -506,7 +506,7 @@
       "id": "2",
       "idPatient": 2,
       "tittle": "Task 2",
-      "description": "This is a task description",
+      "description": "Ejercicio de Relajación y Respiración",
       "status": 1,
       "createdAt": "2021-06-01",
       "updatedAt": "2021-06-01"
@@ -515,8 +515,8 @@
       "id": "3",
       "idPatient": 3,
       "tittle": "Task 3",
-      "description": "This is a task description",
-      "status": 0,
+      "description": "Jornada de Actividad Física al Aire Libre",
+      "status": 1,
       "createdAt": "2021-06-01",
       "updatedAt": "2021-06-01"
     }
@@ -529,7 +529,8 @@
       "hungerAverage": "1",
       "sleepAverage": "2",
       "energyAverage": "2",
-      "hydrationAverage": "5"
+      "hydrationAverage": "5",
+      "id": "7cb4"
     },
     {
       "idPatient": "1",
@@ -538,7 +539,8 @@
       "hungerAverage": "3",
       "sleepAverage": "1",
       "energyAverage": "3",
-      "hydrationAverage": "1"
+      "hydrationAverage": "1",
+      "id": "342f"
     }
   ]
 }
