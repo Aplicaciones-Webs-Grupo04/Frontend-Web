@@ -1,7 +1,7 @@
 <template>
   <pv-toast></pv-toast>
   <header>
-    <pv-toolbar class="bg-primary" fixed>
+    <pv-toolbar class="toolbar" fixed>
       <template #start>
         <pv-button class="p-button-text text-white" icon="pi pi-bars" @click="toggleDrawer" />
         <h3>PSYMED</h3>
@@ -63,11 +63,25 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
+  background-color: #081828 ; /* Background color for sidebar */
+  padding: 10px; /* Padding for sidebar */
 }
+
 .spacer {
   flex-grow: 1;
 }
-.icon-button .pi {
-  font-size: 24px; /* Ajusta el tamaño según tus necesidades */
+
+.toolbar {
+  background-color: #10BEAE;
+  color: #ffffff;
+}
+
+.p-button-text.icon-button {
+  color: #fff; /* Default icon color */
+  margin: 10px 0; /* Margin for icons */
+}
+
+.p-button-text.icon-button:hover {
+  color: #10BEAE; /* Icon color on hover */
 }
 </style>
