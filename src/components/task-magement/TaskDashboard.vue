@@ -95,7 +95,7 @@ const incompleteTasks = ref([]);
 const overdueTasks = ref([]);
 const dueTodayTasks = ref([]);
 const isModalVisible = ref(false); // Estado del modal
-const newTask = ref({ title: '', description: '', status: 0, idPatient: 1 }); // Datos de la nueva tarea
+const newTask = ref({ tittle: '', description: '', status: 0, idPatient: 1 }); // Datos de la nueva tarea
 
 onMounted(async () => {
   tasks.value = await getTasks();
@@ -133,27 +133,45 @@ onMounted(async () => {
   });
 });
 
-// Funciones para manejar el modal
+// Mostrar el modal para agregar tarea
 const showAddTaskModal = () => {
   isModalVisible.value = true;
 };
 
+// Cerrar el modal
 const closeModal = () => {
   isModalVisible.value = false;
 };
 
-const addTask = () => {
-  // Lógica para agregar la tarea, aquí puedes hacer una llamada a tu API para añadir la nueva tarea
-  console.log('Nueva tarea agregada:', newTask.value);
-  // Restablecer los campos
-  newTask.value = { title: '', description: '', status: 0, idPatient: 1 };
-  closeModal();
+// Función para agregar la tarea a la fake API
+const addTask = async () => {
+  try {
+    // Hacemos una solicitud POST a la API para agregar la nueva tarea
+    const response = await fetch('http://localhost:3000/task', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newTask.value),
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al agregar la tarea');
+    }
+
+    const addedTask = await response.json();
+    tasks.value.push(addedTask); // Añadir la nueva tarea a la lista de tareas
+    closeModal(); // Cerrar el modal
+    newTask.value = { tittle: '', description: '', status: 0, idPatient: 1 }; // Restablecer el formulario
+  } catch (error) {
+    console.error('Error al agregar la tarea:', error);
+  }
 };
 </script>
 
 <style scoped>
 .task-dashboard {
-  background-color: white; /* Fondo blanco */
+  background-color: #10BEAE; /* Color del fondo del contenedor */
   color: black; /* Texto negro */
   padding: 20px;
   display: flex;
@@ -165,6 +183,10 @@ const addTask = () => {
 
 .task-cards {
   flex: 2; /* Toma el espacio suficiente para los cuadros de tareas */
+  background-color: white; /* Fondo blanco para la sección de tareas */
+  padding: 20px; /* Espaciado interno */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar efecto de profundidad */
 }
 
 .task-header {
@@ -216,18 +238,17 @@ const addTask = () => {
 .modal {
   display: flex; /* Muestra como flex */
   position: fixed; /* Fijo al viewport */
-  z-index: 1; /* Sobre otros elementos */
+  z-index: 2; /* Sobre otros elementos */
   left: 0;
   top: 0;
   width: 100%; /* Ancho completo */
   height: 100%; /* Altura completa */
   overflow: auto; /* Desplazamiento si es necesario */
-  background-color: rgb(0,0,0); /* Fondo negro */
-  background-color: rgba(0,0,0,0.4); /* Fondo negro con opacidad */
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
 }
 
 .modal-content {
-  background-color: #fefefe; /* Fondo blanco para el contenido del modal */
+  background-color: white; /* Fondo blanco para el contenido del modal */
   margin: 15% auto; /* Margen superior e inferior */
   padding: 20px; /* Espaciado interno */
   border: 1px solid #888; /* Borde gris */
@@ -249,3 +270,4 @@ const addTask = () => {
   cursor: pointer; /* Cambia el cursor al pasar el mouse */
 }
 </style>
+
