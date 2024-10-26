@@ -1,49 +1,30 @@
-# UNIVERSIDAD PERUANA DE CIENCIAS APLICADAS
+The following project implements the FrontEnd of the web application 'Psymed'.
 
-# APLICACIONES WEBS (SW52)
-## PROFESOR: Tinoco Licas, Juan Carlos
-## INFORME TB1
-## START UP: WebSource
-## PRODUCTO: PSYMED
+## Recommended IDE Setup
 
-### INTEGRANTES:
-<table>
-  <thead>
-    <tr>
-      <th style="background-color: #333; color: #fff;">Apellidos y Nombres</th>
-      <th style="background-color: #333; color: #fff;">Código de Alumno</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Ccotarma Ttio, Sihuar Eduardo Eusebio</td>
-      <td>u20211c736</td>
-    </tr>
-    <tr>
-      <td>Javier Murillo, Mathias</td>
-      <td>u202022211</td>
-    </tr>
-    <tr>
-      <td>Luza Carhuamaca, Jose Adrian</td>
-      <td>u202213404</td>
-    </tr>
-    <tr>
-      <td>Lizano Coll Cardenas, Fernando Jesus</td>
-      <td>u202214522</td>
-    </tr>
-    <tr>
-      <td>Maita Falckenheiner, Romina Guadalupe</td>
-      <td>u202213765</td>
-    </tr>
-    <tr>
-      <td>Riega Salas, José Miguel</td>
-      <td>u202211254</td>
-    </tr>
-  </tbody>
-</table>
+[WebStorm](https://www.jetbrains.com/webstorm/promo/?msclkid=17126052f356153486a3067bad42be6f&utm_source=bing&utm_medium=cpc&utm_campaign=AMER_en_AMER_WebStorm_Branded&utm_term=webstorm&utm_content=webstorm)
+or [Visual Studio Code](https://code.visualstudio.com/) with [Vetur]() and [ESLint]() plugins.
 
---- 
+## Customize configuration
 
-FECHA: AGOSTO 2024
+## Project Setup
 
----
+```sh
+npm install
+```
+
+```sh
+npm install primevue
+```
+```sh
+npm install axios
+```
+```sh
+npm install vue-i18n@9
+```
+
+### Compile and Hot-Reload for Development
+
+```sh
+npm run dev
+```
