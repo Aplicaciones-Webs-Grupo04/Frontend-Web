@@ -1,5 +1,5 @@
 
-import User from '../models/User';
+import User from '../Entities/Counts.js';
 import http from "../../shared/services/http-common.js";
 
 const API_URL = '/accounts'; // Asegúrate de que esta sea la ruta correcta
