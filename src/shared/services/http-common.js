@@ -1,7 +1,8 @@
 import axios from "axios";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const http = axios.create({
-    baseURL: 'https://alurageek-api-peach.vercel.app', // Use the proxy configured in Vite
+    baseURL: API_BASE_URL, // Use the proxy configured in Vite
     headers: { 'Content-type': 'application/json' }
 });
 
